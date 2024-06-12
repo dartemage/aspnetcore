@@ -24,8 +24,8 @@ builder.Services.AddOpenApi("v2", options => {
         return Task.CompletedTask;
     });
 });
-builder.Services.AddOpenApi("responses");
-builder.Services.AddOpenApi("forms");
+// builder.Services.AddOpenApi("responses");
+// builder.Services.AddOpenApi("forms");
 
 var app = builder.Build();
 
@@ -63,6 +63,9 @@ var v2 = app.MapGroup("v2")
 var responses = app.MapGroup("responses")
     .WithGroupName("responses");
 
+app.MapGet("/test-class", (TestClass testClass) => testClass);
+
+#region hide
 v1.MapGet("/array-of-guids", (Guid[] guids) => guids);
 
 v1.MapPost("/todos", (Todo todo) => Results.Created($"/todos/{todo.Id}", todo))
@@ -83,6 +86,9 @@ responses.MapGet("/200-only-xml", () => new TodoWithDueDate(1, "Test todo", fals
 
 responses.MapGet("/triangle", () => new Triangle { Color = "red", Sides = 3, Hypotenuse = 5.0 });
 responses.MapGet("/shape", () => new Shape { Color = "blue", Sides = 4 });
+responses.MapGet("/", () => new TestClass { TestProperty = "Hello, World!" });
+
+#endregion hide
 
 app.MapControllers();
 
@@ -91,3 +97,15 @@ app.Run();
 // Make Program class public to support snapshot testing
 // against sample app using WebApplicationFactory.
 public partial class Program { }
+
+/// <summary>
+/// Represents a todo item.
+/// </summary>
+public class TestClass
+{
+    /// <summary>
+    /// This is a test property.
+    /// </summary>
+    /// <value></value>
+    public string? TestProperty { get; set; }
+}

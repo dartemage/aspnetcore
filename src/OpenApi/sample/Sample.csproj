@@ -7,6 +7,9 @@
     <!-- Required to generated trimmable Map-invocations. -->
     <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
     <IsAotCompatible>true</IsAotCompatible>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.AspNetCore.OpenApi.Generated</InterceptorsPreviewNamespaces>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,9 +28,11 @@
     <Compile Include="../test/SharedTypes.cs" />
   </ItemGroup>
 
-  <!-- Required to generated trimmable Map-invocations. -->
   <ItemGroup>
+    <!-- Required to generated trimmable Map-invocations. -->
     <ProjectReference Include="$(RepoRoot)/src/Http/Http.Extensions/gen/Microsoft.AspNetCore.Http.RequestDelegateGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <!-- Required to support XML commnets in the generated code. -->
+    <ProjectReference Include="$(RepoRoot)/src/OpenApi/gen/Microsoft.AspNetCore.OpenApi.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
 
 </Project>

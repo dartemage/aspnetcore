@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 
+/// <summary>
+/// This is a test controller
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
